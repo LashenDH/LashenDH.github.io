@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+body {
+    background-color: #321a2b;
+    overflow: hidden;
+}
+
+#number {
+    color: white;
+    position: absolute;
+
+    right: 40px;
+    top: 20px;
+
+    font-family: 'Poppins';
+    font-size: 1.5rem;
+}
+
+#butter-container {
+    position: absolute;
+
+    top: 35vh;
+    left: 48vw;
+	
+    animation: float 4s ease-in-out infinite;
+}
+
+#butter {
+    width: 13vw;
+    cursor: pointer;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+#butter-container:hover #butter { transform: scale(1.1); }
+#butter-container:active #butter { transform: scale(1.2); }
+
+#slot {
+	width: 60px;
+	height: 60px;
+	user-select: none;
+    cursor: pointer;
+} 
+
+#single{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 30px;
+	height: 30px;
+	pointer-events: none;
+}
+
+#inventory_container{
+    position: absolute;
+    background: url('/textures/ButterPack/gui/inventory/background.png');
+    height: 84.5vh;
+    width: 35vw;
+    background-size: cover;
+    top: 6vh;
+    left: 3vw;
+    z-index: -100000;
+    align-items: center;
+}
+
+#inventory {
+    display: flex;
+    flex-direction: column;
+}
+
+#inventory_slots{
+    width: 32vw;
+    position: absolute;
+    bottom: 5vh;
+    left: 3.5vw;
+	z-index: -1;
+}
+
+#crafting_slots {
+    display: flex;
+    width: 15vw;
+    flex-wrap: wrap;
+	z-index: 0;
+    position: absolute;
+    top: 6vh;
+    left: 3.5vw;
+}
+
+#result{
+    position: absolute;
+    top: 16.7vh;
+    right: 3.5vw;
+}
+
+#crafting_arrow{
+    width: 6vw;
+    left: 19vw;
+    top: 15vh;
+    position: absolute;
+}
+
+#tab img{
+    width: 60px;
+    height: 60px;
+}
+
+#tab{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 8vh;
+    left: 34.8vw;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+#information_image{
+    width: 5vw;
+    margin-top: 3vh;
+}
+
+#information_container{
+    padding: 1vmax;
+    background-color: #572f4b;
+    border-radius: 2vmax;
+    width: 20vw;
+    height: 30vh;
+    text-align: center;
+    position: absolute;
+    right: 3.5vw;
+    bottom: 10vh;
+}
+
+#information_container h2{
+    font-family: 'Poppins Black', Arial;
+    text-transform: uppercase;
+    font-size: 20px;
+    color: #eb4034;
+}
+
+#information_container h3{
+    font-family: 'Poppins', Arial;
+    font-size: 15px;
+    margin-top: 0vh;
+    color: white;
+    text-transform: uppercase;
+}
+
+#shop_container{
+    margin-top: 3.6vh;
+    margin-left: 3.5vw;
+    height: 78vh;
+    width: 30vw;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+#shop_container::-webkit-scrollbar{
+  display: none;
+}
+
+.shop_item{    
+    width: 28vw;
+    height: 16vh;
+    margin-top: 15px;
+    color: white;
+    position: relative;
+    font-family: 'Poppins';
+}
+
+#shop_bg{
+    z-index: -10000;
+    position: absolute;
+    width: 28vw;
+}
+
+.shop_item h1{
+    font-size: 20px;
+}
+
+.shop_item h2{
+    font-size: 15px;
+}
+
+.shop_details{
+    padding: 20px;
+    margin-left: 80px;
+}
+
+.unlocked{
+    cursor: pointer;
+}
+
+#tab {
+    z-index: 1000000000000000001;
+    cursor: pointer;
+}
+
+#shop_container {
+    z-index: -999999999999999999;
+}
