@@ -62,7 +62,7 @@ body {
 
 #inventory_container{
     position: absolute;
-    background: url('Butter/textures/ButterPack/gui/inventory/background.png');
+    background: url('./textures/ButterPack/gui/inventory/background.png');
     height: 84.5vh;
     width: 35vw;
     background-size: cover;
