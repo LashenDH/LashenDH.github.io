@@ -87,7 +87,7 @@ class Shop {
     this.ownedLabel.setAttribute('id', name + 'owned');
 
     this.bg.setAttribute('id', 'shop_bg');
-    this.bg.setAttribute('src', '/textures/ButterPack/gui/inventory/shop.png');
+    this.bg.setAttribute('src', './textures/ButterPack/gui/inventory/shop.png');
 
     this.container.setAttribute('class', 'shop_item');
     this.details.setAttribute('class', 'shop_details')
