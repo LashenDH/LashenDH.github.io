@@ -45,6 +45,7 @@ class ItemSingle {
 		this.item.setAttribute('draggable', 'false');
 
 		this.instance = slot;
+		currentlyDraggedItem = this;
 
 		document.body.appendChild(this.item);
 
@@ -229,6 +230,19 @@ var pos = function (o, x, y, event) {
 
 tooltip.style.display = 'none';
 
+let currentlyDraggedItem = null;
+document.addEventListener('keydown', (event) => {
+	if (event.key === 'OS') {
+	  if (currentlyDraggedItem) {
+		const inventorySlot = currentlyDraggedItem.sourceSlot;
+		if (inventorySlot) {
+		  inventorySlot.SetItem(currentlyDraggedItem.type);
+		  currentlyDraggedItem.item.remove();
+		  currentlyDraggedItem = null;
+		}
+	  }
+	}
+});
 
 class Slot {
 	constructor(inventory) {
@@ -301,8 +315,10 @@ class Slot {
 		for (let i = 0; i < 9; i++) {
 			const craftingSlot = inventory.inventory[i];
 			if (craftingSlot.item !== 'x') {
-				inventory.parentInventory.setItem(this.findEmptySlot(inventory), craftingSlot.item);
-				craftingSlot.SetItem('x');
+				if(craftingSlot.slot.style.opacity == 1){
+					inventory.parentInventory.setItem(this.findEmptySlot(inventory), craftingSlot.item);
+					craftingSlot.SetItem('x');
+				}
 			}
 		}
 	}
@@ -404,7 +420,7 @@ class Slot {
 
 	RemoveClick(e) {
 		if (current_item_single) {
-			if (e.target.slot && e.target.instance.inventory.size != 1) {
+			if (e.target.slot && e.target.instance.inventory.size != 1 && e.target.instance.inventory.size != 16) {
 				if (e.target.instance.inventory.drag == false) {
 					for (var i = 0; i < 9; i++) {
 						e.target.instance.inventory.setItem(i, 'x');
@@ -416,7 +432,6 @@ class Slot {
 				}
 
 				const resultSlot = current_item_single.instance.inventory.size == 1;
-
 				if (resultSlot) {
 					document.querySelectorAll('.crafting-slot').forEach(craftingSlot => {
 						craftingSlot.instance.SetItem('x');
