@@ -93,10 +93,6 @@ document.getElementById('houseicon').addEventListener('click', function () {
 	tab('shop');
 });
 
-document.getElementById('equipicon').addEventListener('click', function () {
-	tab('equip');
-});
-
 function hideInventory() {
 	inventory.hide();
 	crafting.hide();
