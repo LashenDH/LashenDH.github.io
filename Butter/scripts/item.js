@@ -230,6 +230,7 @@ var pos = function (o, x, y, event) {
 
 tooltip.style.display = 'none';
 
+let currentlyHoldingDown = false;
 let currentlyDraggedItem = null;
 document.addEventListener('visibilitychange', (event) => {
 	if (currentlyDraggedItem) {
@@ -254,6 +255,7 @@ document.addEventListener('keydown', (event) => {
 });
 
 document.addEventListener('blur', (event) => {
+	currentlyHoldingDown = false;
 	if (currentlyDraggedItem) {
 	  const inventorySlot = currentlyDraggedItem.sourceSlot;
 	  if (inventorySlot) {
@@ -264,6 +266,15 @@ document.addEventListener('blur', (event) => {
 	}
 });
 
+document.addEventListener('pointerdown', (e)=>{
+	document.body.setPointerCapture(e.pointerId);
+	currentlyHoldingDown = true;
+});
+
+document.addEventListener('pointerup', (e)=>{
+	document.body.releasePointerCapture(e.pointerId);
+	currentlyHoldingDown = false;
+});
 class Slot {
 	constructor(inventory) {
 		this.slot = document.createElement('img');
@@ -397,7 +408,7 @@ class Slot {
 		this.imageInformation.setAttribute('src', `./textures/ButterPack/item/slot/${this.item}.png`);
 		this.imageInformation.setAttribute('id', 'modalImage');
 
-		this.imageInformation.addEventListener('mousemove', (e) => {
+				this.imageInformation.addEventListener('mousemove', (e) => {
 			tooltip.style.display = 'block';
 			tooltip.innerHTML = `${this.inventory.itemType[this.item].name} <br> ${this.inventory.itemType[this.item].description}`;
 			pos(tooltip, 5, 0, e);
@@ -482,6 +493,15 @@ let mouse_y = 0;
 let current_item_single = null;
 
 document.addEventListener('mousemove', (event) => {
+	if (currentlyDraggedItem && event.buttons === 0) {
+		const inventorySlot = currentlyDraggedItem.sourceSlot;
+		if (inventorySlot) {
+		  inventorySlot.SetItem(currentlyDraggedItem.type);
+		  currentlyDraggedItem.item.remove();
+		  currentlyDraggedItem = null;
+		}
+	  }
+
 	mouse_x = event.clientX;
 	mouse_y = event.clientY;
 
