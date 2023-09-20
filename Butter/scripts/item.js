@@ -233,7 +233,7 @@ tooltip.style.display = 'none';
 class Slot {
 	constructor(inventory) {
 		this.slot = document.createElement('img');
-		this.slot.src = `textures/ButterPack/gui/inventory/slot.png`;
+		this.slot.src = `./textures/ButterPack/gui/inventory/slot.png`;
 		this.slot.setAttribute('id', 'slot');
 		this.slot.setAttribute('draggable', 'false');
 		this.inventory = inventory;
@@ -317,11 +317,11 @@ class Slot {
 	}
 	SetItem(item) {
 		if (item !== 'x') {
-			this.slot.src = `textures/ButterPack/item/slot/${item}.png`;
+			this.slot.src = `./textures/ButterPack/item/slot/${item}.png`;
 			this.slot.setAttribute('item', item);
 			this.item = item;
 		} else {
-			this.slot.src = `textures/ButterPack/gui/inventory/slot.png`;
+			this.slot.src = `./textures/ButterPack/gui/inventory/slot.png`;
 			this.slot.setAttribute('item', 'x');
 			this.item = 'x';
 		}
@@ -355,10 +355,10 @@ class Slot {
 
 		this.bg = document.createElement('img');
 		this.bg.setAttribute('id', 'modifierRemovalBg');
-		this.bg.setAttribute('src', 'textures/ButterPack/gui/inventory/shop.png');
+		this.bg.setAttribute('src', './textures/ButterPack/gui/inventory/shop.png');
 
 		this.imageInformation = document.createElement('img');
-		this.imageInformation.setAttribute('src', `textures/ButterPack/item/slot/${this.item}.png`);
+		this.imageInformation.setAttribute('src', `./textures/ButterPack/item/slot/${this.item}.png`);
 		this.imageInformation.setAttribute('id', 'modalImage');
 
 		this.imageInformation.addEventListener('mousemove', (e) => {
