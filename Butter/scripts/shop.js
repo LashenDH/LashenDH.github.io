@@ -99,13 +99,13 @@ class Shop {
     this.ownedLabel.setAttribute('id', name + 'owned');
 
     this.bg.setAttribute('id', 'shop_bg');
-    this.bg.setAttribute('src', '/textures/ButterPack/gui/inventory/shop.png');
+    this.bg.setAttribute('src', './textures/ButterPack/gui/inventory/shop.png');
 
     if (this.tiers == false) {
-      this.image.setAttribute('src', `/textures/ButterPack/gui/shop/${this.name.replace(' ', '')}.png`);
+      this.image.setAttribute('src', `./textures/ButterPack/gui/shop/${this.name.replace(' ', '')}.png`);
     }
     else {
-      this.image.setAttribute('src', `/textures/ButterPack/gui/shop/${this.name.replace(' ', '')}_${this.tiers[this.tier]}.png`);
+      this.image.setAttribute('src', `./textures/ButterPack/gui/shop/${this.name.replace(' ', '')}_${this.tiers[this.tier]}.png`);
     }
 
     this.container.setAttribute('class', 'shop_item');
@@ -222,7 +222,7 @@ class Shop {
 
   incrementTier(number) {
     this.tier += number;
-    this.image.setAttribute('src', `/textures/ButterPack/gui/shop/${this.name}_${this.tiers[this.tier]}.png`);
+    this.image.setAttribute('src', `./textures/ButterPack/gui/shop/${this.name}_${this.tiers[this.tier]}.png`);
   }
 
   incrementPrice(numberOfIncrements) {
