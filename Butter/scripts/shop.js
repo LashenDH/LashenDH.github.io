@@ -99,7 +99,7 @@ class Shop {
     this.ownedLabel.setAttribute('id', name + 'owned');
 
     this.bg.setAttribute('id', 'shop_bg');
-    this.bg.setAttribute('src', './textures/ButterPack/gui/inventory/shop.png');
+    this.bg.setAttribute('src', '../Butter/textures/ButterPack/gui/inventory/shop.png');
 
     if (this.tiers == false) {
       this.image.setAttribute('src', `./textures/ButterPack/gui/shop/${this.name.replace(' ', '')}.png`);
