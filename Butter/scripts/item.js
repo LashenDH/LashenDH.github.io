@@ -232,7 +232,7 @@ tooltip.style.display = 'none';
 
 let currentlyDraggedItem = null;
 document.addEventListener('keydown', (event) => {
-	if (event.key === 'OS') {
+	if (event.key === 'OS' || event.key === 'Meta') {
 	  if (currentlyDraggedItem) {
 		const inventorySlot = currentlyDraggedItem.sourceSlot;
 		if (inventorySlot) {
