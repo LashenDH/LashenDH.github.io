@@ -231,15 +231,37 @@ var pos = function (o, x, y, event) {
 tooltip.style.display = 'none';
 
 let currentlyDraggedItem = null;
-document.addEventListener('blur', (event) => {
-	  if (currentlyDraggedItem) {
-		const inventorySlot = currentlyDraggedItem.sourceSlot;
-		if (inventorySlot) {
-		  inventorySlot.SetItem(currentlyDraggedItem.type);
-		  currentlyDraggedItem.item.remove();
-		  currentlyDraggedItem = null;
-		}
+document.addEventListener('visibilitychange', (event) => {
+	if (currentlyDraggedItem) {
+	  const inventorySlot = currentlyDraggedItem.sourceSlot;
+	  if (inventorySlot) {
+		inventorySlot.SetItem(currentlyDraggedItem.type);
+		currentlyDraggedItem.item.remove();
+		currentlyDraggedItem = null;
 	  }
+	}
+});
+
+document.addEventListener('keydown', (event) => {
+	if (currentlyDraggedItem && event.key == 'Meta') {
+	  const inventorySlot = currentlyDraggedItem.sourceSlot;
+	  if (inventorySlot) {
+		inventorySlot.SetItem(currentlyDraggedItem.type);
+		currentlyDraggedItem.item.remove();
+		currentlyDraggedItem = null;
+	  }
+	}
+});
+
+document.addEventListener('blur', (event) => {
+	if (currentlyDraggedItem) {
+	  const inventorySlot = currentlyDraggedItem.sourceSlot;
+	  if (inventorySlot) {
+		inventorySlot.SetItem(currentlyDraggedItem.type);
+		currentlyDraggedItem.item.remove();
+		currentlyDraggedItem = null;
+	  }
+	}
 });
 
 class Slot {
