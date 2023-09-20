@@ -102,10 +102,10 @@ class Shop {
     this.bg.setAttribute('src', '../Butter/textures/ButterPack/gui/inventory/shop.png');
 
     if (this.tiers == false) {
-      this.image.setAttribute('src', `../Butter/textures/ButterPack/gui/shop/${this.name.replace(' ', '')}.png`);
+      this.image.setAttribute('src', `../Butter/textures/ButterPack/gui/shop/${this.name.replace(' ', '').toLowerCase()}.png`);
     }
     else {
-      this.image.setAttribute('src', `../Butter/textures/ButterPack/gui/shop/${this.name.replace(' ', '')}_${this.tiers[this.tier]}.png`);
+      this.image.setAttribute('src', `../Butter/textures/ButterPack/gui/shop/${this.name.replace(' ', '').toLowerCase()}_${this.tiers[this.tier]}.png`);
     }
 
     this.container.setAttribute('class', 'shop_item');
