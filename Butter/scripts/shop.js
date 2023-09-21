@@ -188,7 +188,7 @@ this.container.addEventListener('click', () => {
         this.ownedLabel.textContent = this.owned;
 
         this.incrementPrice(1);
-        this.increaseBPSForShop();
+        this.increaseBPSForShop(this.name);
         this.tooltipCanBuy(this.name);
           
         localStorage.setItem(`${this.name}_owned`, this.owned);
