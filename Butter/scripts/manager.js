@@ -1,5 +1,4 @@
 import { Item } from './item.js';
-// import { Game } from './butter.js';
 
 const STORAGETYPE = {
 	SMALL: 18,
@@ -29,26 +28,32 @@ const ITEMTYPE = {
 	backpack: { name: 'Backpack', description: `Bigger storage. Can be upgraded`, include: false }, //include: false is flag for making sure recipes dont take backpack or wallet
 };
 
+var items = ['apple', 'buttery', 'dropofbutter', 'shopkeeperfriend', 'null', 'x', 'x'];
+
 //INITIALIZE INVENTORY
 var inventory = new Item(ITEMTYPE.backpack, STORAGETYPE.SMALL, ITEMTYPE);
-inventory.setItem(0, 'apple');
-inventory.setItem(1, 'apple');
-inventory.setItem(2, 'apple');
-inventory.setItem(3, 'apple');
-inventory.setItem(4, 'apple');
-inventory.setItem(5, 'dropofbutter');
-inventory.setItem(7, 'buttery');
-inventory.setItem(9, 'dropofbutter');
-inventory.setItem(10, 'apple');
-inventory.setItem(11, 'apple');
-inventory.setItem(12, 'buttery');
-inventory.setItem(13, 'dropofbutter');
-inventory.setItem(15, 'buttery');
-inventory.setItem(16, 'apple');
-inventory.setItem(17, 'apple');
-inventory.setItem(18, 'apple');
 inventory.appendToParent(document.getElementById('inventory_slots'));
 inventory.setClass('inventory');
+
+var i = 0;
+var notX = false;
+
+if (localStorage.getItem('inventory') != null) {
+	inventory.getFromLocalStorage('inventory').forEach(slot => {
+		if (slot != 'x') {
+			notX = true;
+		}
+		inventory.setItem(i, slot);
+		i += 1;
+	});
+}
+
+if (notX == false) {
+	for (let i = 0; i < 18; i++) {
+		var item = items[Math.floor(Math.random() * items.length)];
+		inventory.setItem(i, item);
+	}
+}
 
 var crafting = new Item(ITEMTYPE.backpack, STORAGETYPE.CRAFTING, ITEMTYPE);
 crafting.appendToParent(document.getElementById('crafting_slots'));
@@ -69,12 +74,20 @@ recipe.appendToParent(document.getElementById('recipe_information'));
 recipe.showRecipe(crafting, result);
 recipe.setClass('recipe');
 
-var i = 0;
+i = 0;
+if (localStorage.getItem('modifiers') != null) {
+	inventory.getFromLocalStorage('modifiers').forEach(slot => {
+		equip.setItem(i, slot);
+		i += 1;
+	});
+}
+
+i = 0;
 for (const [key, value] of Object.entries(ITEMTYPE)) {
 	if (value.include != false) {
 		recipe.setItem(i, key);
 	}
-	else{
+	else {
 		continue;
 	}
 	i += 1;
