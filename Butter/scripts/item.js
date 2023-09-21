@@ -331,14 +331,14 @@ class Slot {
 					this.clearCraftingGrid(inventory.recipeResult);
 
 					for (var i = 0; i < 9; i++) {
-						// inventory.recipeResult.setItem(i, 'x');
+						inventory.recipeResult.setItem(i, 'x');
 						inventory.recipeResult.elementInventory[i].style.opacity = '1';
 						inventory.recipeOutput.elementInventory[0].style.opacity = '1';
 					}
 				}
 			});
 		}
-
+		
 		this.slot.instance = this;
 
 		return this;
@@ -384,7 +384,6 @@ class Slot {
 			this.item = 'x';
 		}
 
-		
 		if (this.inventory.size === 9) {
 			this.inventory.craft();
 		}
