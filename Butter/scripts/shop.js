@@ -1,4 +1,3 @@
-
 var upgrades = document.getElementsByClassName('upgrade');
 var discount = 1;
 var shop_names = [];
@@ -9,7 +8,11 @@ class Game {
   constructor() {
     var butter = document.getElementById('butter-container');
 
-    this.butter = 410;
+    if(localStorage.getItem('game_butter') == null){
+      localStorage.setItem('game_butter', 0);
+    }
+    this.butter = parseInt(localStorage.getItem('game_butter'));
+
     this.increment = 1;
     this.autoIncrementInterval = null;
     this.bps = 0;
@@ -38,6 +41,7 @@ class Game {
     var number = document.getElementById('number');
     this.butter = value;
     number.textContent = formatNumber(Math.floor(this.butter));
+    localStorage.setItem('game_butter', this.butter);
   }
 
   checkAvailableUpgrades() {
@@ -63,8 +67,22 @@ class Shop {
   constructor(game, name, baseCost, tiers) {
     this.game = game;
     this.name = name;
-    this.cost = Math.ceil(baseCost / discount);
+
+    if(localStorage.getItem(`${this.name}_owned`) == null){
+      localStorage.setItem(`${this.name}_owned`, 0);
+    }
+    if(localStorage.getItem(`${this.name}_cost`) == null){
+      localStorage.setItem(`${this.name}_cost`, Math.ceil(baseCost / discount));
+    }
+
+    this.cost = parseInt(localStorage.getItem(`${this.name}_cost`));
+    this.owned = parseInt(localStorage.getItem(`${this.name}_owned`));
     this.baseCost = baseCost;
+
+    for(let i = 0; i < this.owned; i++){
+      this.increaseBPSForShop(this.name);
+    }
+    
     if (tiers) {
       this.tiers = tiers;
       this.tier = 0;
@@ -73,7 +91,6 @@ class Shop {
       this.tiers = false;
       this.tier = false;
     }
-    this.owned = 0;
 
     shop_names.push(this.name);
     shop_items.push(this);
@@ -163,8 +180,7 @@ class Shop {
       o.style.left = (posX + x) + "px";
     }
     tooltip.style.display = 'none';
-
-    this.container.addEventListener('click', () => {
+this.container.addEventListener('click', () => {
       if (this.container.classList.contains('unlocked')) {
         this.game.decrementButter(this.cost);
         this.game.checkAvailableUpgrades();
@@ -172,35 +188,42 @@ class Shop {
         this.ownedLabel.textContent = this.owned;
 
         this.incrementPrice(1);
+        this.increaseBPSForShop();
+        this.tooltipCanBuy(this.name);
+          
+        localStorage.setItem(`${this.name}_owned`, this.owned);
+        localStorage.setItem(`${this.name}_cost`, this.cost);
 
-        this.tooltipCanBuy();
-
-        if (this.name == 'Whisk') {
-          this.game.bps += 1;
-        }
-        if (this.name == 'Hand Mixer') {
-          this.game.bps += 10;
-        }
-        if (this.name == 'Creamer') {
-          this.game.bps += 25;
-        }
-        // if (this.name == 'Emulsifier') {
-        //   this.game.bps += 1000;
-        // }
-        // if (this.name == 'Farm') {
-        //   this.game.bps += 100000;
-        // }
-        // if (this.name == 'Factory') {
-        //   this.game.bps += 1000000;
-        // }
-        // if (this.name == 'Meltdown') {
-        //   this.game.bps += 10000000;
-        // }
-        // if (this.name == 'Atomic Creamer') {
-        //   this.game.bps += 100000000;
-        // }
+        console.log(localStorage.getItem(`${this.name}_cost`));
       }
     });
+  }
+
+  increaseBPSForShop(name){
+    if (name == 'Whisk') {
+      this.game.bps += 1;
+    }
+    if (name == 'Hand Mixer') {
+      this.game.bps += 10;
+    }
+    if (name == 'Creamer') {
+      this.game.bps += 25;
+    }
+    // if (this.name == 'Emulsifier') {
+    //   this.game.bps += 1000;
+    // }
+    // if (this.name == 'Farm') {
+    //   this.game.bps += 100000;
+    // }
+    // if (this.name == 'Factory') {
+    //   this.game.bps += 1000000;
+    // }
+    // if (this.name == 'Meltdown') {
+    //   this.game.bps += 10000000;
+    // }
+    // if (this.name == 'Atomic Creamer') {
+    //   this.game.bps += 100000000;
+    // }
   }
 
   tooltipCanBuy(){
@@ -222,7 +245,7 @@ class Shop {
 
   incrementTier(number) {
     this.tier += number;
-    this.image.setAttribute('src', `./textures/ButterPack/gui/shop/${this.name}_${this.tiers[this.tier]}.png`);
+    this.image.setAttribute('src', `/textures/ButterPack/gui/shop/${this.name}_${this.tiers[this.tier]}.png`);
   }
 
   incrementPrice(numberOfIncrements) {
@@ -230,6 +253,9 @@ class Shop {
     this.cost = Math.round(this.baseCost * Math.pow(1.15, this.owned));
     this.cost = Math.ceil(this.cost / discount);
     this.costLabel.textContent = formatNumber(this.cost);
+    
+    localStorage.setItem(`${this.name}_owned`, this.owned);
+    localStorage.setItem(`${this.name}_cost`, this.cost);
   }
 
   setPrice(price) {
@@ -242,6 +268,9 @@ class Shop {
     this.tooltipCanBuy();
     this.owned = owned;
     this.ownedLabel.textContent = this.owned;
+    
+    localStorage.setItem(`${this.name}_owned`, this.owned);
+    localStorage.setItem(`${this.name}_cost`, this.cost);
   }
 
   setName(name) {
