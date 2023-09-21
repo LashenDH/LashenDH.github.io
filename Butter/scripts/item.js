@@ -118,6 +118,18 @@ class Inventory {
 		}
 	}
 
+	addToLocalStorage(storageName){
+		var temp = [];
+		this.inventory.forEach(slot => {
+			temp.push(slot.item);
+		});
+		localStorage.setItem(storageName, JSON.stringify(temp));
+	}
+
+	getFromLocalStorage(storageName){
+		return JSON.parse(localStorage.getItem(storageName));
+	}
+
 	initializeModifiers() {
 		this.modifiers = true;
 	}
@@ -134,7 +146,7 @@ class Inventory {
 		parent.appendChild(this.inventoryElement);
 	}
 
-	setItem(index, item) {
+	setItem(index, item){
 		try {
 			this.inventory[index].SetItem(item);
 		} catch (error) {
@@ -267,14 +279,13 @@ document.addEventListener('blur', (event) => {
 });
 
 document.addEventListener('pointerdown', (e)=>{
-	document.body.setPointerCapture(e.pointerId);
 	currentlyHoldingDown = true;
 });
 
 document.addEventListener('pointerup', (e)=>{
-	document.body.releasePointerCapture(e.pointerId);
 	currentlyHoldingDown = false;
 });
+
 class Slot {
 	constructor(inventory) {
 		this.slot = document.createElement('img');
@@ -373,12 +384,21 @@ class Slot {
 			this.item = 'x';
 		}
 
+		
 		if (this.inventory.size === 9) {
 			this.inventory.craft();
 		}
 
 		if (item === 'x' && this.item !== 'x') {
 			current_item_single.sourceSlot = this;
+		}
+		
+		if(this.inventory.size == 18){
+			this.inventory.addToLocalStorage('inventory');
+		}
+
+		if(this.inventory.size == 3){
+			this.inventory.addToLocalStorage('modifiers');
 		}
 	}
 	HandleClick(e) {
@@ -408,7 +428,7 @@ class Slot {
 		this.imageInformation.setAttribute('src', `./textures/ButterPack/item/slot/${this.item}.png`);
 		this.imageInformation.setAttribute('id', 'modalImage');
 
-				this.imageInformation.addEventListener('mousemove', (e) => {
+		this.imageInformation.addEventListener('mousemove', (e) => {
 			tooltip.style.display = 'block';
 			tooltip.innerHTML = `${this.inventory.itemType[this.item].name} <br> ${this.inventory.itemType[this.item].description}`;
 			pos(tooltip, 5, 0, e);
@@ -451,6 +471,7 @@ class Slot {
 
 	RemoveClick(e) {
 		if (current_item_single) {
+			currentlyDraggedItem = null;
 			if (e.target.slot && e.target.instance.inventory.size != 1 && e.target.instance.inventory.size != 16) {
 				if (e.target.instance.inventory.drag == false) {
 					for (var i = 0; i < 9; i++) {
@@ -493,9 +514,10 @@ let mouse_y = 0;
 let current_item_single = null;
 
 document.addEventListener('mousemove', (event) => {
-	if (currentlyDraggedItem && event.buttons === 0) {
+	if (currentlyDraggedItem && event.buttons == 0) {
 		const inventorySlot = currentlyDraggedItem.sourceSlot;
 		if (inventorySlot) {
+			console.log(event.buttons);
 		  inventorySlot.SetItem(currentlyDraggedItem.type);
 		  currentlyDraggedItem.item.remove();
 		  currentlyDraggedItem = null;
