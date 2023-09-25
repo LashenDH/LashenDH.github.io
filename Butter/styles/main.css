@@ -67,7 +67,7 @@ body {
     width: 465px;
     height: 525px;
     
-    background-image: url('/textures/ButterPack/gui/inventory/background.png');
+    background-image: url('./textures/ButterPack/gui/inventory/background.png');
     background-size: cover;
     
     padding: 2em;
@@ -121,7 +121,7 @@ body {
 .slot{ width: 60px; }
 
 .shop-item{
-    background-image: url('/textures/ButterPack/gui/inventory/shop.png');
+    background-image: url('./textures/ButterPack/gui/inventory/shop.png');
     background-size: cover;
     
     width: 400px;
