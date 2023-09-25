@@ -88,13 +88,19 @@ body {
         display: block !important;
     }
 
-    .bottom-bar{
-        width: 100vw;
-        height: 5em;
-        background-color: #43273b;
-        position: absolute;
-        bottom: 0;
+
+    footer{
+        background-color: #43273b !important;
     }
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100vw;
+    height: 5em;
+    background-color: rgba(0,0, 0, 0);
 }
 
 .butter-per-second{
