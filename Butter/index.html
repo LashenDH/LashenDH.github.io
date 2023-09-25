@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Butter Clicker</title>
+    <link rel="icon" type="image/x-icon" href="/textures/favicon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+
+<body>
+    <!-- <script src="scripts/manager.js" type="module"></script> -->
+
+    <!-- <div id='equip'>
+        <h1>ACTIVE MODIFIERS</h1>
+        <div id='equip_slots'></div>
+    </div> -->
+    <div class="wrapper">
+        <nav class="ml-4 mt-4 sidebar text-white position-relative">
+            <div class="sidebar-header">
+                <h3>INVENTORY</h3>
+            </div>
+            <div class="main-shop"></div>
+        </nav>
+        <div class="butter position-absolute">
+            <img src='textures/ButterPack/main/butter.gif' class="butter-image">
+        </div>
+    </div>
+    <p class='butter-value h1 text-right'>50</p>
+    <div class="bottom-bar">
+        <div class="menu-buttons position-absolute menu-left">
+            <img src="/textures/ButterPack/gui/tabs/standard/backpack_phone.png" alt="">
+            <img src="/textures/ButterPack/gui/tabs/standard/house_phone.png" alt="">
+        </div>
+        <h2 class="position-absolute menu-right butter-per-second">BPS: 0</h2>
+        <h2 class="position-absolute menu-right title">Butter Clicker V0</h2>
+    </div>
+    <!-- <div id='toolbar'>
+        <aside>
+            <img src="../textures/ButterPack/gui/inventory/background.png" alt="" id='toolbar_background'>
+            <div id='tab'>
+                <img src="./textures/ButterPack/gui/tabs/standard/house.png" alt="" id='houseicon'
+                    onmouseover='this.src = "textures/ButterPack/gui/tabs/active/house.png"'
+                    onmouseout='this.src = "textures/ButterPack/gui/tabs/standard/house.png"'>
+                <img src="./textures/ButterPack/gui/tabs/standard/backpack.png" alt="" id='backpackicon'
+                    onmouseover='this.src = "textures/ButterPack/gui/tabs/active/backpack.png"'
+                    onmouseout='this.src = "textures/ButterPack/gui/tabs/standard/backpack.png"'>
+            </div>
+            <div id='shop_container'>
+            </div>
+        </aside>
+        <div id='inventory'>
+            <div id='inventory_slots'></div>
+        </div>
+        <div id='crafting'>
+            <div id='crafting_slots'></div>
+            <img src='./textures/ButterPack/gui/crafting/result_marker.png' id='crafting_arrow' alt="">
+        </div>
+        <div id='result'></div>
+    </div>
+    --> 
+    <div id="tooltip">
+        <span class="title" id="text"></span>
+    </div>
+    
+    <!--
+    <div id='recipes'>
+        <div id='recipe_information'>
+            <h1>JOURNAL</h1>
+            
+        </div>
+        <img src="textures/ButterPack/gui/inventory/journal_background.png" alt="" id='recipes_bg'>
+    </div> !-->
+    <script src='scripts/shop.js'></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
