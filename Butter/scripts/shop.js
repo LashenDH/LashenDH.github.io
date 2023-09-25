@@ -214,12 +214,15 @@ class Shop {
   increaseBPSForShop(name){
     if (name == 'Whisk') {
       this.game.bps += 1;
+      document.getElementsByClassName('butter-per-second')[0].textContent = `BPS: ${this.game.bps}`;
     }
     if (name == 'Hand Mixer') {
       this.game.bps += 10;
+      document.getElementsByClassName('butter-per-second')[0].textContent = `BPS: ${this.game.bps}`;
     }
     if (name == 'Creamer') {
       this.game.bps += 25;
+      document.getElementsByClassName('butter-per-second')[0].textContent = `BPS: ${this.game.bps}`;
     }
     // if (this.name == 'Emulsifier') {
     //   this.game.bps += 1000;
