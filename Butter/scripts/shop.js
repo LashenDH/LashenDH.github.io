@@ -186,10 +186,10 @@ class Shop {
 
 
     if (this.tiers == false) {
-      this.shop_image.setAttribute('src', `./textures/ButterPack/gui/shop/${this.name.replace(' ', '')}.png`);
+      this.shop_image.setAttribute('src', `/textures/ButterPack/gui/shop/${(this.name.replace(' ', '')).toLowerCase()}.png`);
     }
     else {
-      this.shop_image.setAttribute('src', `./textures/ButterPack/gui/shop/${this.name.replace(' ', '')}_${this.tiers[this.tier]}.png`);
+      this.shop_image.setAttribute('src', `/textures/ButterPack/gui/shop/${(this.name.replace(' ', '')).toLowerCase()}_${this.tiers[this.tier]}.png`);
     }
 
     this.shop_heading.textContent = this.name;
