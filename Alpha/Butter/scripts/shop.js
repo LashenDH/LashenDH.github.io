@@ -263,9 +263,17 @@ class Shop {
       this.bps += 50;
       this.game.bps += 50;
     }
-    if (name == 'Golden Grass') {
+    if (name == 'Cyborg Cow') {
       this.bps += 150;
       this.game.bps += 150;
+    }
+    if (name == 'Golden Grass') {
+      this.bps += 500;
+      this.game.bps += 500;
+    }
+    if (name == 'Intelligent Cow') {
+      this.bps += 1000;
+      this.game.bps += 1000;
     }
     document.getElementsByClassName('butter-per-second')[0].textContent = `Butter Per Second: ${this.game.bps}`;
   }
