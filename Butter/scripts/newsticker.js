@@ -1,6 +1,6 @@
 const TICKERS = [
     { butter: 0, message: `You are new to this game aren't you!` },
-    { butter: 0, message: `Welcome to Butter Clicker V0` },
+    { butter: 0, message: `Welcome to Butter Clicker V1` },
 
     { butter: 10, message: `The grind has only just begun, young farmer.` },
     { butter: 10, message: `Nobody wants your butter.` },
