@@ -20,11 +20,11 @@ const RARITY = {
 }
 
 const ITEMTYPE = {
-	apple: { name: 'Apple', description: `<span style='font-size: 12px;'>Grow in your garden <br> <div style='color: ${RARITY.common}'>+5% Butter Per Second <br></span><span style='font-size: 15px;'>COMMON</span></div>`, include: false },
-	buttery: { name: 'Buttery Clicks', description: `<span style='font-size: 12px;'>Slippery <br><div style='color: ${RARITY.uncommon}'>x2 Butter Per Click <br></span><span style='font-size: 15px;'>UNCOMMON</span></div>` },
-	dropofbutter: { name: 'Drop Of Butter', description: `<span style='font-size: 12px;'>Tiny Boost <br> <div style='color: ${RARITY.uncommon}'>x2 Butter Per Second <br></span><span style='font-size: 15px;'>UNCOMMON</span></div>` },
-	shopkeeperfriend: { name: "Shopkeeper's Friend", description: `<span style='font-size: 12px;'>Friends Forever <br> <div style='color: ${RARITY.rare}'>x2 Shop Discount <br></span><span style='font-size: 15px;'>RARE</span></div>` },
-	null: { name: 'Null', description: `<span style='font-size: 12px;'>The End? <br> <div style='color: ${RARITY.epic}'> PERKS UNKNOWN <br><span style='font-size: 15px;'>EPIC</span></div>` },
+	apple: { name: 'Apple', description: `<span style='font-size: 10px;'>Grow in your garden <br> <div style='color: ${RARITY.common}'>+5% Butter Per Second <br></span><span style='font-size: 12px;'>COMMON</span></div>`, include: false, worth: 5000 },
+	buttery: { name: 'Buttery Click', description: `<span style='font-size: 10px;'>Slippery <br><div style='color: ${RARITY.uncommon}'>x2 Butter Per Click <br></span><span style='font-size: 12px;'>UNCOMMON</span></div>`, worth: 10000 },
+	dropofbutter: { name: 'Drop Of Butter', description: `<span style='font-size: 10px;'>Tiny Boost <br> <div style='color: ${RARITY.uncommon}'>x2 Butter Per Second <br></span><span style='font-size: 12px;'>UNCOMMON</span></div>`, worth: 10000 },
+	shopkeeperfriend: { name: "Shopkeeper's Friend", description: `<span style='font-size: 10px;'>Friends Forever <br> <div style='color: ${RARITY.rare}'>x2 Shop Discount <br></span><span style='font-size: 12px;'>RARE</span></div>`, worth: 20000 },
+	null: { name: 'Null', description: `<span style='font-size: 10px;'>The End? <br> <div style='color: ${RARITY.epic}'> PERKS UNKNOWN <br><span style='font-size: 12px;'>EPIC</span></div>`, worth: 100000 },
 	wallet: { name: 'Wallet', description: `A wallet for the rich`, gold: 0, silver: 0, copper: 0, include: false },
 	backpack: { name: 'Backpack', description: `Bigger storage. Can be upgraded`, include: false }, //include: false is flag for making sure recipes dont take backpack or wallet
 };
@@ -32,48 +32,49 @@ const ITEMTYPE = {
 var items = ['apple', 'buttery', 'dropofbutter', 'shopkeeperfriend', 'null', 'x', 'x'];
 
 //INITIALIZE INVENTORY
-// var inventory = new Item(ITEMTYPE.backpack, STORAGETYPE.SMALL, ITEMTYPE);
-// inventory.appendToParent(document.getElementById('inventory_slots'));
-// inventory.setClass('inventory');
 
-// var i = 0;
-// var notX = false;
+var crafting = new Item(ITEMTYPE.backpack, STORAGETYPE.CRAFTING, ITEMTYPE);
+crafting.appendToParent(document.getElementsByClassName('inventory-container')[0]);
+crafting.setClass('main-crafting');
 
-// if (localStorage.getItem('inventory') != null) {
-// 	inventory.getFromLocalStorage('inventory').forEach(slot => {
-// 		if (slot != 'x') {
-// 			notX = true;
-// 		}
-// 		inventory.setItem(i, slot);
-// 		i += 1;
-// 	});
-// }
+var arrow = document.createElement('img');
+arrow.setAttribute('src', './textures/ButterPack/gui/crafting/result_marker.png');
+document.getElementsByClassName('inventory-container')[0].appendChild(arrow);
+arrow.setAttribute('class', 'main-arrow');
 
-// if (notX == false) {
-// 	for (let i = 0; i < 18; i++) {
-// 		var item = items[Math.floor(Math.random() * items.length)];
-// 		inventory.setItem(i, item);
-// 	}
-// }
+var result = new Item(ITEMTYPE.backpack, STORAGETYPE.RESULTANT_SLOT, ITEMTYPE);
+result.appendToParent(document.getElementsByClassName('inventory-container')[0]);
 
-// var crafting = new Item(ITEMTYPE.backpack, STORAGETYPE.CRAFTING, ITEMTYPE);
-// crafting.appendToParent(document.getElementById('crafting_slots'));
-// crafting.setClass('crafting');
-// crafting.setParentInventory(inventory);
+var inventory = new Item(ITEMTYPE.backpack, STORAGETYPE.SMALL, ITEMTYPE);
+inventory.appendToParent(document.getElementsByClassName('inventory-container')[0]);
+inventory.setClass('main-inventory');
 
-// var result = new Item(ITEMTYPE.backpack, STORAGETYPE.RESULTANT_SLOT, ITEMTYPE);
-// result.appendToParent(document.getElementById('result'));
-// result.setClass('result');
-// crafting.setResult(result);
+crafting.setParentInventory(inventory);
+
+result.setClass('main-result');
+crafting.setResult(result);
+
+var i = 0;
+var notX = false;
+
+if (localStorage.getItem('inventory') != null) {
+	inventory.getFromLocalStorage('inventory').forEach(slot => {
+		if (slot != 'x') {
+			notX = true;
+		}
+		inventory.setItem(i, slot);
+		i += 1;
+	});
+}
 
 // // var equip = new Item(ITEMTYPE.backpack, STORAGETYPE.BOOSTER_EQUIP_SLOT, ITEMTYPE);
 // // equip.appendToParent(document.getElementById('equip_slots'));
 // // equip.setClass('equip');
 
-// var recipe = new Item(ITEMTYPE.backpack, STORAGETYPE.RECIPE, ITEMTYPE, false);
-// recipe.appendToParent(document.getElementById('recipe_information'));
-// recipe.showRecipe(crafting, result);
-// recipe.setClass('recipe');
+var recipe = new Item(ITEMTYPE.backpack, STORAGETYPE.RECIPE, ITEMTYPE, false);
+recipe.appendToParent(document.getElementsByClassName('journal-slots')[0]);
+recipe.showRecipe(crafting, result);
+recipe.setClass('recipe');
 
 // i = 0;
 // if (localStorage.getItem('modifiers') != null) {
@@ -83,62 +84,34 @@ var items = ['apple', 'buttery', 'dropofbutter', 'shopkeeperfriend', 'null', 'x'
 // 	});
 // }
 
-// i = 0;
-// for (const [key, value] of Object.entries(ITEMTYPE)) {
-// 	if (value.include != false) {
-// 		recipe.setItem(i, key);
-// 	}
-// 	else {
-// 		continue;
-// 	}
-// 	i += 1;
-// }
+i = 0;
+for (const [key, value] of Object.entries(ITEMTYPE)) {
+	if (value.include != false) {
+		recipe.setItem(i, key);
+	}
+	else {
+		continue;
+	}
+	i += 1;
+}
 
-// var currentTab = 'inventory';
-// hideShop();
-// showInventory();
+openTab('main-shop');
 
-// document.getElementById('backpackicon').addEventListener('click', function () {
-// 	tab('inventory');
-// });
+function openTab(tabClass){
+	Array.from(document.getElementsByClassName('sidebar-item')).forEach(item => {
+		item.style.display = 'none';
+	});
+	document.getElementsByClassName(tabClass)[0].style.display = 'initial';
+}
 
-// document.getElementById('houseicon').addEventListener('click', function () {
-// 	tab('shop');
-// });
+document.getElementById('house-tab').addEventListener('mousedown', ()=>{
+	openTab('main-shop');
+	document.getElementsByClassName('sidebar-header-text')[0].textContent = 'Shop';
+});
 
-// function hideInventory() {
-// 	inventory.hide();
-// 	crafting.hide();
-// 	result.hide();
-// 	document.getElementById('crafting_arrow').style.display = 'none';
-// }
+document.getElementById('backpack-tab').addEventListener('mousedown', ()=>{
+	openTab('inventory-container');
+	document.getElementsByClassName('sidebar-header-text')[0].textContent = 'Inventory';
+});
 
-// function showInventory() {
-// 	inventory.show();
-// 	crafting.show();
-// 	result.show();
-// 	document.getElementById('crafting_arrow').style.display = 'block';
-// }
-
-// function showShop() {
-// 	document.getElementById('shop_container').style.display = 'block';
-// }
-
-// function hideShop() {
-// 	document.getElementById('shop_container').style.display = 'none';
-// }
-
-// function tab(tabToPress) {
-// 	if (tabToPress == 'inventory') {
-// 		hideShop();
-// 		showInventory();
-// 	}
-// 	if (tabToPress == 'shop') {
-// 		showShop();
-// 		hideInventory();
-// 	}
-// }
-
-// var equip = new Item(ITEMTYPE.backpack, STORAGETYPE.BOOSTER_EQUIP_SLOT, ITEMTYPE);
-// equip.appendToParent(document.getElementById('equip_container'));
-// equip.setClass('equip');
+export {inventory, ITEMTYPE}
