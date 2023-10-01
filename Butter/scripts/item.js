@@ -290,7 +290,7 @@ class Slot {
 	constructor(inventory) {
 		this.slot = document.createElement('img');
 		this.slot.src = `./textures/ButterPack/gui/inventory/slot.png`;
-		this.slot.setAttribute('id', 'slot');
+		this.slot.setAttribute('class', 'slot');
 		this.slot.setAttribute('draggable', 'false');
 		this.inventory = inventory;
 
@@ -415,59 +415,6 @@ class Slot {
 		}
 	}
 
-	modifierRemovalModal() {
-		this.container = document.createElement('div');
-		this.container.setAttribute('id', 'modifierRemovalContainer');
-
-		this.bg = document.createElement('img');
-		this.bg.setAttribute('id', 'modifierRemovalBg');
-		this.bg.setAttribute('src', './textures/ButterPack/gui/inventory/shop.png');
-
-		this.imageInformation = document.createElement('img');
-		this.imageInformation.setAttribute('src', `./textures/ButterPack/item/slot/${this.item}.png`);
-		this.imageInformation.setAttribute('id', 'modalImage');
-
-		this.imageInformation.addEventListener('mousemove', (e) => {
-			tooltip.style.display = 'block';
-			tooltip.innerHTML = `${this.inventory.itemType[this.item].name} <br> ${this.inventory.itemType[this.item].description}`;
-			pos(tooltip, 5, 0, e);
-		});
-
-		this.imageInformation.addEventListener('mouseleave', (e) => {
-			tooltip.style.display = 'none';
-		})
-
-		this.textInformation = document.createElement('h2');
-		this.textInformation.innerHTML = `<span style='color: white; font-size: 20px;'>WARNING</span><br> You are about to delete your modifier <br> <span style='color: #d90e00; cursor: pointer;' id='deleteModalButton'>DELETE</span> OR <span style='color: #0fd457; cursor: pointer;' id='goBackModalButton'>GO BACK</span>`
-		this.textInformation.setAttribute('id', 'modalText');
-
-		this.container.classList.add('modalShow');
-		this.container.style.display = 'block';
-		this.container.classList.remove('modalHide');
-
-		this.container.appendChild(this.textInformation);
-		this.container.appendChild(this.imageInformation);
-		this.container.appendChild(this.bg);
-		document.body.appendChild(this.container);
-
-		document.getElementById('deleteModalButton').addEventListener('mousedown', (e)=>{
-			this.SetItem('x');
-			this.container.classList.remove('modalShow');
-			this.container.classList.add('modalHide');
-
-			setTimeout(()=>{
-				this.container.remove()}, 500);
-		});
-		
-		document.getElementById('goBackModalButton').addEventListener('mousedown', (e)=>{
-			this.container.classList.remove('modalShow');
-			this.container.classList.add('modalHide');
-
-			setTimeout(()=>{
-				this.container.remove()}, 500);
-		});
-	}
-
 	RemoveClick(e) {
 		if (current_item_single) {
 			currentlyDraggedItem = null;
@@ -516,7 +463,6 @@ document.addEventListener('mousemove', (event) => {
 	if (currentlyDraggedItem && event.buttons == 0) {
 		const inventorySlot = currentlyDraggedItem.sourceSlot;
 		if (inventorySlot) {
-			console.log(event.buttons);
 		  inventorySlot.SetItem(currentlyDraggedItem.type);
 		  currentlyDraggedItem.item.remove();
 		  currentlyDraggedItem = null;
