@@ -8,66 +8,60 @@
     <link rel="icon" type="image/x-icon" href="/textures/favicon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="./styles/main.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/styles/main.css">
+    <!-- <script>
+        localStorage.clear();
+    </script> -->
 </head>
-
 <body>
-    <!-- <script src="scripts/manager.js" type="module"></script> -->
-
-    <!-- <div id='equip'>
-        <h1>ACTIVE MODIFIERS</h1>
-        <div id='equip_slots'></div>
-    </div> -->
     <div class="wrapper">
-        <nav class="ml-4 mt-4 sidebar text-white position-relative">
+        <nav class="ml-2 mt-5 sidebar text-white position-relative">
             <div class="sidebar-header">
-                <h3>INVENTORY</h3>
+                <h3 class="sidebar-header-text">Shop</h3>
             </div>
-            <div class="main-shop"></div>
+            <div class="main-shop sidebar-item">
+                <div class="shop-wrapper"></div>
+            </div>
+            <div class="inventory-container sidebar-item"></div>
         </nav>
+        <div class="tabs">
+            <img src="/textures/ButterPack/gui/tabs/standard/house.png" class="tab" id="house-tab"
+                onmouseover='this.src = "textures/ButterPack/gui/tabs/active/house.png"'
+                onmouseout='this.src = "textures/ButterPack/gui/tabs/standard/house.png"'>
+            <img src="/textures/ButterPack/gui/tabs/standard/backpack.png" class="tab" id="backpack-tab"
+                onmouseover='this.src = "textures/ButterPack/gui/tabs/active/backpack.png"'
+                onmouseout='this.src = "textures/ButterPack/gui/tabs/standard/backpack.png"'>
+        </div>
         <div class="butter position-absolute">
             <img src='textures/ButterPack/main/butter.gif' class="butter-image">
         </div>
+        <nav class="ml-2 mt-5 journal position-absolute">
+            <div class="journal-header">
+                <h3 class="journal-header-text">Journal</h3>
+            </div>
+            <div class="journal-slots"></div>
+        </nav>
     </div>
-    <p class='butter-value h1 text-right'>50</p>
-    <footer class="bottom-bar">
-        <div class="menu-buttons position-absolute menu-left">
-            <img src="../Butter/textures/ButterPack/gui/tabs/standard/backpack_phone.png" alt="">
-            <img src="../Butter/textures/ButterPack/gui/tabs/standard/house_phone.png" alt="">
+    <div class="marquee">
+        <div class="marquee_bg">
+            <p class="news-ticker h1"></p>
         </div>
+    </div>
+    <p class='butter-value h1 text-right'></p>
+    <div id="snackbar"><div class="close-button-achievement">X</div><img src="textures/ButterPack/item/slot/apple.png" class="achievement-image"><div class="achievement-text"><span style='color: #de413f;' class="achievement-static-text">Achievement Get</span><br>Description</div></div>
+    
+    <footer class="bottom-bar">
         <div class="position-absolute menu-right">
-            <h2 class="butter-per-second">BPS: 0</h2>
+            <h2 class="butter-per-second">Butter Per Second: 0</h2>
+            <h2 class="butter-per-click">Butter Per Click: 0</h2>
             <h2 class="title">Butter Clicker V0</h2>
         </div>
     </footer>
-    <!-- <div id='toolbar'>
-        <aside>
-            <img src="../textures/ButterPack/gui/inventory/background.png" alt="" id='toolbar_background'>
-            <div id='tab'>
-                <img src="./textures/ButterPack/gui/tabs/standard/house.png" alt="" id='houseicon'
-                    onmouseover='this.src = "textures/ButterPack/gui/tabs/active/house.png"'
-                    onmouseout='this.src = "textures/ButterPack/gui/tabs/standard/house.png"'>
-                <img src="./textures/ButterPack/gui/tabs/standard/backpack.png" alt="" id='backpackicon'
-                    onmouseover='this.src = "textures/ButterPack/gui/tabs/active/backpack.png"'
-                    onmouseout='this.src = "textures/ButterPack/gui/tabs/standard/backpack.png"'>
-            </div>
-            <div id='shop_container'>
-            </div>
-        </aside>
-        <div id='inventory'>
-            <div id='inventory_slots'></div>
-        </div>
-        <div id='crafting'>
-            <div id='crafting_slots'></div>
-            <img src='./textures/ButterPack/gui/crafting/result_marker.png' id='crafting_arrow' alt="">
-        </div>
-        <div id='result'></div>
-    </div>
-    --> 
     <div id="tooltip">
         <span class="title" id="text"></span>
     </div>
-    
+
     <!--
     <div id='recipes'>
         <div id='recipe_information'>
@@ -76,7 +70,10 @@
         </div>
         <img src="textures/ButterPack/gui/inventory/journal_background.png" alt="" id='recipes_bg'>
     </div> !-->
-    <script src='scripts/shop.js'></script>
+    <script src="scripts/achievements.js" type="module"></script>
+    <script src="scripts/manager.js" type="module"></script>
+    <script src='scripts/shop.js' type="module"></script>
+    <script src='scripts/newsticker.js' type="module"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
